@@ -47,6 +47,7 @@ repos:
     additional_dependencies:
     - tomli
     - packaging
+    - nox
     exclude: tests
 - repo: local
   hooks:

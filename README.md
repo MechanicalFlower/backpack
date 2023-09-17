@@ -6,6 +6,6 @@
 ![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-green?logo=open-source-initiative&logoColor=white)
 
-Utilities for game project management
+Utilities for games project management
 
 </div>

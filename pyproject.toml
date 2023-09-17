@@ -1,7 +1,12 @@
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "backpack"
-version = "0.1.0"
-description = "Utilities for MechanicalFLower games project management"
+version = "0.0.0"
+description = "Utilities for games project management"
 license = "MIT"
 authors = ["Florian Vazelle <florian.vazelle@vivaldi.net>"]
 readme = ["README.md", "LICENSE.md"]
@@ -21,6 +26,7 @@ generate_credits = "backpack.generate_credits:main"
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
 pytest-mock = "^3.11.1"
+nox = "^2023.4.22"
 
 [tool.yapf]
 based_on_style = "pep8"
