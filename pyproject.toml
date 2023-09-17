@@ -31,8 +31,7 @@ line-length = 88
 
 [tool.mypy]
 strict = true
-
-[tool.codespell]
+exclude = 'tests'
 
 [tool.bandit]
 exclude_dirs = ['tests']
