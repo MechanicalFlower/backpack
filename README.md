@@ -1,6 +1,6 @@
 <div align="center">
 
-# `🎒 magic_combo`
+# `🌟 magic_combo`
 
 ![Python Version](https://img.shields.io/badge/python-3.10-0a7bbc?logo=python&logoColor=white)
 ![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)
