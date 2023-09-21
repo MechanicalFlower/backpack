@@ -1,6 +1,6 @@
 import filecmp
 
-from backpack.generate_credits import generate_credits_file, parse_dep5_file
+from magic_combo.generate_credits import generate_credits_file, parse_dep5_file
 
 
 class TestGenerateCredits:

@@ -3,13 +3,13 @@ from datetime import datetime
 
 from packaging.version import Version
 
-from backpack.bump_version import replace_version
+from magic_combo.bump_version import replace_version
 
 
 class TestBumpVersion:
 
     def test_0001_bump_version(self, tmpdir, mocker, script_loc):
-        mocker.patch('backpack.bump_version.get_today',
+        mocker.patch('magic_combo.bump_version.get_today',
                      return_value=datetime(2014, 6, 2))
 
         input_cfg_file = script_loc.joinpath(

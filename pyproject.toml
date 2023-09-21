@@ -4,8 +4,8 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "backpack"
-version = "0.0.0"
+name = "magic_combo"
+version = "0.1.0"
 description = "Utilities for games project management"
 license = "MIT"
 authors = ["Florian Vazelle <florian.vazelle@vivaldi.net>"]
@@ -20,8 +20,8 @@ mkdocs = "^1.5.2"
 gdscript-docs-maker = "^1.5.1"
 
 [tool.poetry.scripts]
-bump_version = "backpack.bump_version:main"
-generate_credits = "backpack.generate_credits:main"
+bump_version = "magic_combo.bump_version:main"
+generate_credits = "magic_combo.generate_credits:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
