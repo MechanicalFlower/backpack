@@ -11,9 +11,9 @@ updates:
   commit-message:
       prefix: "chore"
       include: "scope"
-    labels: 
-       - "dependabot" 
-       - "dependencies"
+  labels:
+     - "dependabot"
+     - "dependencies"
 
 - package-ecosystem: pip
   directory: "/"
@@ -25,6 +25,6 @@ updates:
   commit-message:
       prefix: "chore"
       include: "scope"
-    labels: 
-       - "dependabot" 
-       - "dependencies"
+  labels:
+     - "dependabot"
+     - "dependencies"
