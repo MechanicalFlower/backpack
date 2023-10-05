@@ -14,7 +14,7 @@ repository = "https://github.com/MechanicalFlower/magic_combo"
 include = ["LICENSE.md"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.10"
 pre-commit = "^3.3.3"
 reuse = "^2.1.0"
 gdtoolkit = "==4.*"

@@ -4,7 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 - Add Pull Request title linter ([#9](https://github.com/MechanicalFlower/magic_combo/pull/9))
-- Add support for python versions from 3.7 to 3.12 ([#10](https://github.com/MechanicalFlower/magic_combo/pull/10)
+- Add support for python versions from 3.10 to 3.12 ([#10](https://github.com/MechanicalFlower/magic_combo/pull/10)
 ### Changed
 ### Deprecated
 ### Removed
