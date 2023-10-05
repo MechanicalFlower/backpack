@@ -3,11 +3,9 @@ Updates the game version for export (based on the file .version).
 """
 
 import re
-import shutil
 from argparse import ArgumentParser
 from datetime import datetime
 from pathlib import Path
-from tempfile import mkstemp
 
 from packaging import version
 
@@ -28,20 +26,20 @@ def sed(pattern: str | re.Pattern[str],
     :param source: input filename
     :param output: output filename, if it's None replace the source in-place
     """
-    _fd, name = mkstemp()
-    with open(source, 'r') as fin, open(name, 'w') as fout:
+    lines = []
+    with open(source, 'r') as fin:
 
         for line in fin:
             out = re.sub(pattern, replace, line)
-            print(out)
-            fout.write(out)
-
-        fout.writelines(fin.readlines())
+            lines.append(out)
 
     if output is None:
         output = source
 
-    shutil.move(name, output)
+    with open(output, 'w') as fout:
+
+        for line in lines:
+            fout.write(line)
 
 
 def read_version_file(source: Path) -> str:
