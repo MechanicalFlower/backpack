@@ -66,6 +66,39 @@ $ pip install magic_combo
 
 ## Usage
 
+To list all sucommands, run:
 ```
 $ magic_combo --list
+Subcommands:
+
+  playbook.build
+  playbook.ci-build
+  playbook.clean
+  playbook.export-release-all
+  playbook.run
+  script.bump-version           Updates the game
+                                version for export.
+  script.generate-credits       Generate a
+                                CREDITS.md file.
+  task.clean-combo
+  task.clean-godot
+  task.clean-plug
+  task.editor
+  task.export-release-linux
+  task.export-release-mac
+  task.export-release-windows
+  task.godot
+  task.import-resources
+  task.install-addons
+  task.install-godot
+  task.install-templates
+  task.makedirs
+  task.run-release
 ```
+
+And to run any subcommands, run:
+
+```
+$ magic_combo <sucommand>
+```
+
