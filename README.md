@@ -46,19 +46,22 @@ And the second goal of this package is to pin
 ### Optional
 
 I attach importance to being able  to do
- simple things without extra tools (KISS),
- and to depend on as few ecosystems as possible.
+ things without extra tools, so my personal
+ game projects used this package
+ to simplify some tasks, but if you know
+ how to use Godot you can do anything
+ with Godot.
 
-If you know how to use Godot you can do anything
- with Godot, I choose python to write small
- scripts and this project was born to localize
+This project was born to localize
  my scripts in one place rather than having
  them duplicated in each project.
 
 ## Install
 
-This project uses python and pip. Go check
- them out if you don't have them locally installed.
+This project uses [python](https://www.python.org/)
+ and [pip](https://pip.pypa.io/en/stable/).
+ Go check them out if you don't have them
+ locally installed.
 
 ```
 $ pip install magic_combo
@@ -101,4 +104,3 @@ And to run any subcommands, run:
 ```
 $ magic_combo <sucommand>
 ```
-
