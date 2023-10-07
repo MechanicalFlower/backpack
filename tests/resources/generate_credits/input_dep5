@@ -33,11 +33,6 @@ Source: https://github.com/Zylann/marbles
 
 # Textures
 
-Files: assets/icons/*
-Copyright: 2023 Icons8
-License: LicenseRef-linksware
-Source: https://icons8.com/
-
 Files: assets/textures/marble/*
 Copyright: 2017-2023 Lennart Demes
 License: CC0-1.0
