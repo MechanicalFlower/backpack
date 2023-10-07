@@ -7,7 +7,6 @@
 ## Models
 - "[assets/blocks/*](https://github.com/Zylann/marbles)" by **Zylann** licensed under [MIT](https://spdx.org/licenses/MIT.html)
 ## Textures
-- "[assets/icons/*](https://icons8.com/)" by **Icons8** licensed under [LicenseRef-linksware](https://spdx.org/licenses/LicenseRef-linksware.html)
 - "[assets/textures/marble/*](https://ambientcg.com/view?id=Ground037)" by **Lennart Demes** licensed under [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)
 - "[assets/textures/wood.jpg](https://github.com/Zylann/marbles)" by **Zylann** licensed under [MIT](https://spdx.org/licenses/MIT.html)
 ## Sounds
