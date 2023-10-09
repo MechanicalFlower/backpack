@@ -1,130 +1,219 @@
 from pathlib import Path
+from typing import Any, Iterable
 
 from invoke.collection import Collection
 from invoke.context import Context
 from invoke.tasks import task
 
-from .scripts.bump_version import read_version_file
+from .config import ConfigWrapper
 
-GODOT_VERSION = read_version_file(Path('.godot_version'))
-RELEASE_NAME = "stable"
-SUBDIR = ""
-GODOT_PLATFORM = "linux.x86_64"
-GODOT_FILENAME = f"Godot_v{GODOT_VERSION}-{RELEASE_NAME}_{GODOT_PLATFORM}"
-GODOT_TEMPLATE = f"Godot_v{GODOT_VERSION}-{RELEASE_NAME}_export_templates.tpz"
+GODOT_URL = "https://downloads.tuxfamily.org/godotengine"
 
-GAME_NAME = "Greeter"
-GAME_VERSION = read_version_file(Path('.version'))
+COMBO_PATH = Path(".combo")
+
+COMBO_CACHE_PATH = COMBO_PATH.joinpath("cache")
+COMBO_BIN_PATH = COMBO_PATH.joinpath("bin")
+COMBO_BUILD_PATH = COMBO_PATH.joinpath("build")
+
+String = str | Path
+
+
+def cmd(c: Context, command: String, *arguments: String) -> Any:
+    builder = CmdBuilder(c)
+    if command == "godot":
+        builder = builder.godot()
+    else:
+        builder = builder.cmd(command)
+    builder = builder.args(*arguments)
+    return builder.run()
+
+
+class CmdBuilder:
+
+    def __init__(self, c: Context) -> None:
+        self.c = c
+        self._args: Iterable[str] = []
+        self._cmd: str = ''
+
+    def run(self) -> Any:
+        return self.c.run(' '.join([self._cmd, *self._args]))
+
+    def cmd(self, cmd: String) -> 'CmdBuilder':
+        self._cmd = str(cmd)
+        return self
+
+    def godot(self) -> 'CmdBuilder':
+        return self.cmd(COMBO_BIN_PATH / ConfigWrapper.godot_filename(self.c))
+
+    def args(self, *args: String) -> 'CmdBuilder':
+        self._args = [str(arg) for arg in args]
+        return self
 
 
 @task()
 def makedirs(c: Context) -> None:
-    c.run("mkdir -p .combo")
-    c.run("mkdir -p .combo/build")
-    c.run("mkdir -p .combo/bin")
-    c.run("mkdir -p .combo/cache")
+    for dir_path in (COMBO_PATH, COMBO_CACHE_PATH, COMBO_BIN_PATH, COMBO_BUILD_PATH):
+        cmd(c, "mkdir", "-p", dir_path)
 
-    c.run("touch .combo/.gitignore")
-    c.run("echo '*' >> .combo/.gitignore")
-
-    c.run("touch .combo/.gdignore")
+    cmd(c, "touch", COMBO_PATH / ".gitignore")
+    cmd(c, "echo", "'*'", ">>", COMBO_PATH / ".gitignore")
+    cmd(c, "touch", COMBO_PATH / ".gdignore")
 
 
 @task()
 def install_godot(c: Context) -> None:
-    c.run((
-        f"curl -X GET 'https://downloads.tuxfamily.org/godotengine/{GODOT_VERSION}{SUBDIR}/{GODOT_FILENAME}.zip'"
-        f" --output .combo/cache/{GODOT_FILENAME}.zip"
-    ))
-    c.run(f"unzip .combo/cache/{GODOT_FILENAME}.zip -d .combo/cache/")
-    c.run("fcp .combo/cache/{GODOT_FILENAME} .combo/bin/{GODOT_FILENAME}")
+    cmd(
+        c,
+        "curl",
+        "-X GET",
+        f"'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_filename(c)}.zip'",
+        "--output",
+        COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip",
+    )
+    cmd(
+        c, "unzip", COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip", "-d",
+        COMBO_CACHE_PATH
+    )
+    cmd(
+        c,
+        "cp",
+        COMBO_CACHE_PATH / ConfigWrapper.godot_filename(c),
+        COMBO_BIN_PATH / ConfigWrapper.godot_filename(c),
+    )
 
 
 @task()
 def install_templates(c: Context) -> None:
-    c.run((
-        f"curl -X GET 'https://downloads.tuxfamily.org/godotengine/{GODOT_VERSION}{SUBDIR}/{GODOT_TEMPLATE}'"
-        f" --output .combo/cache/{GODOT_TEMPLATE}"
-    ))
-    c.runf("unzip .combo/cache/{GODOT_TEMPLATE} -d .combo/cache/")
-    c.run((
-        "mkdir -p ~/.local/share/godot/export_templates"
-        f"/{GODOT_VERSION}.{RELEASE_NAME}"
-    ))
-    c.run((
-        "cp .combo/cache/templates/*"
-        f" ~/.local/share/godot/export_templates/{GODOT_VERSION}.{RELEASE_NAME}"
-    ))
+    cmd(
+        c,
+        "curl",
+        "-X GET",
+        "'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_template(c)}'",
+        "--output",
+        COMBO_CACHE_PATH / ConfigWrapper.godot_template(c),
+    )
+    cmd(
+        c, "unzip", COMBO_CACHE_PATH / ConfigWrapper.godot_template(c), "-d",
+        COMBO_CACHE_PATH
+    )
+    cmd(
+        c, "mkdir", "--parents",
+        f"~/.local/share/godot/export_templates/{ConfigWrapper.godot_version(c)}.{ConfigWrapper.godot_release(c)}"
+    )
+    cmd(
+        c, "cp", COMBO_CACHE_PATH / "templates/*",
+        f"~/.local/share/godot/export_templates/{ConfigWrapper.godot_version(c)}.{ConfigWrapper.godot_release(c)}"
+    )
 
 
 @task(pre=[makedirs])
 def install_addons(c: Context) -> None:
-    c.run(f".combo/bin/{GODOT_FILENAME} --headless --script plug.gd install || true")
+    cmd(
+        c,
+        "godot",
+        "--headless",
+        "--script",
+        "plug.gd",
+        "install",
+        "||",
+        "true",
+    )
 
 
 @task(pre=[makedirs])
 def import_resources(c: Context) -> None:
-    c.run(f".combo/bin/{GODOT_FILENAME} --headless --export-pack null /dev/null")
+    cmd(
+        c,
+        "godot",
+        "--headless",
+        "--export-pack",
+        "null",
+        "/dev/null",
+    )
 
 
 @task()
 def export_release_linux(c: Context) -> None:
-    c.run("mkdir -p .combo/build/linux")
-    c.run((
-        f".combo/bin/{GODOT_FILENAME}"
-        " --export-release 'Linux/X11'"
-        f" --headless .combo/build/linux/{GAME_NAME}.x86_64"
-    ))
-    c.run((
-        "(cd .combo/build/linux"
-        f" && zip {GAME_NAME}-linux-v{GAME_VERSION}.zip -r .)"
-    ))
-    c.run((
-        f"mv .combo/build/linux/{GAME_NAME}-linux-v{GAME_VERSION}.zip"
-        f" .combo/build/{GAME_NAME}-linux-v{GAME_VERSION}.zip"
-    ))
+    export_dir = COMBO_BUILD_PATH / "linux"
+    cmd(c, "mkdir", "--parents", export_dir)
+    cmd(
+        c,
+        "godot",
+        "--export-release 'Linux/X11'",
+        "--headless",
+        export_dir / f"{ConfigWrapper.game_name(c)}.x86_64",
+    )
+    zip_filename = "%s-linux-v%s.zip" % (
+        ConfigWrapper.game_name(c), ConfigWrapper.game_version(c)
+    )
+    cmd(
+        c,
+        "cd",
+        export_dir,
+        "&&",
+        "zip",
+        zip_filename,
+        "-r",
+        ".",
+        "&&",
+        "cd",
+        "-",
+    )
+    cmd(c, "mv", (export_dir / zip_filename), (COMBO_BUILD_PATH / zip_filename))
 
 
 @task()
 def export_release_windows(c: Context) -> None:
-    c.run("mkdir -p .combo/build/windows")
-    c.run((
-        f".combo/bin/{GODOT_FILENAME}"
-        " --export-release 'Windows Desktop'"
-        f" --headless .combo/build/windows/{GAME_NAME}.exe"
-    ))
-    c.run((
-        "(cd .combo/build/windows"
-        f" && zip {GAME_NAME}-windows-v{GAME_VERSION}.zip -r .)"
-    ))
-    c.run((
-        f"mv .combo/build/windows/{GAME_NAME}-windows-v{GAME_VERSION}.zip"
-        f" .combo/build/{GAME_NAME}-windows-v{GAME_VERSION}.zip"
-    ))
+    export_dir = COMBO_BUILD_PATH / "windows"
+    cmd(c, "mkdir", "--parents", export_dir)
+    cmd(
+        c, "godot", "--export-release 'Windows Desktop'"
+        "--headless", export_dir / f"{ConfigWrapper.game_name(c)}.exe"
+    )
+
+    zip_filename = "%s-windows-v%s.zip" % (
+        ConfigWrapper.game_name(c), ConfigWrapper.game_version(c)
+    )
+    cmd(
+        c,
+        "cd",
+        export_dir,
+        "&&",
+        "zip",
+        zip_filename,
+        "-r",
+        ".",
+        "&&",
+        "cd",
+        "-",
+    )
+    cmd(c, "mv", export_dir / zip_filename, COMBO_BUILD_PATH / zip_filename)
 
 
 @task()
 def export_release_mac(c: Context) -> None:
-    c.run((
-        f".combo/bin/{GODOT_FILENAME}"
-        " --export-release 'macOS'"
-        f" --headless .combo/build/{GAME_NAME}-mac-v{GAME_VERSION}.zip"
-    ))
+    cmd(
+        c, "godot", "--export-release 'macOS'"
+        "--headless", (
+            COMBO_BUILD_PATH /
+            f"{ConfigWrapper.game_name(c)}-mac-v{ConfigWrapper.game_version(c)}.zip"
+        )
+    )
 
 
 @task()
 def editor(c: Context) -> None:
-    c.run(f".combo/bin/{GODOT_FILENAME} --editor")
+    cmd(c, "godot", "--editor")
 
 
 @task()
 def godot(c: Context) -> None:
-    c.run(f".combo/bin/{GODOT_FILENAME} $(ARGS)")
+    cmd(c, "godot")
 
 
 @task()
 def run_release(c: Context) -> None:
-    c.run(f".combo/build/linux/{GAME_NAME}.x86_64")
+    cmd(c, COMBO_BUILD_PATH / "linux" / f"{ConfigWrapper.game_name(c)}.x86_64")
 
 
 @task()
@@ -140,12 +229,15 @@ def clean_godot(c: Context) -> None:
 @task()
 def clean_plug(c: Context) -> None:
     c.run("rm -rf .plugged")
-    c.run((
-        "find addons/"
-        " -type d"
-        " -not -name 'addons' -not -name 'gd-plug'"
-        " -exec rm -rf {} \; || true"
-    ))
+    cmd(
+        c,
+        "find",
+        "addons/",
+        "-type d",
+        "-not -name 'addons'",
+        "-not -name 'gd-plug'",
+        "-exec rm -rf {} \; || true",
+    )
 
 
 task_ns = Collection('task')
