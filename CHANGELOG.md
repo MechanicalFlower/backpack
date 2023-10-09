@@ -18,3 +18,4 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `actions/checkout` from 2 to 4 ([#13](https://github.com/MechanicalFlower/magic_combo/pull/13))
 
 [Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...HEAD
+- Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
