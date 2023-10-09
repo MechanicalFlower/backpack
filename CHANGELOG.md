@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add link checker in CI ([#11](https://github.com/MechanicalFlower/magic_combo/pull/11))
 ### Changed
 - Update the README to make it standard ([#8](https://github.com/MechanicalFlower/magic_combo/pull/8))
+- Refactor scripts to use it as one program with pyinvoke ([#5](https://github.com/MechanicalFlower/magic_combo/pull/5))
 ### Deprecated
 ### Removed
 ### Fixed
