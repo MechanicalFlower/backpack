@@ -1,9 +1,4 @@
-"""
-Generate a CREDITS.md file (based on the file .reuse/dep5).
-"""
-
 import os
-from argparse import ArgumentParser
 from pathlib import Path
 from string import Template
 from typing import Dict, List, Optional
@@ -50,12 +45,12 @@ def parse_dep5_file(source: Path) -> Dict[str, List[Dict[str, str]]]:
     return deps
 
 
-def generate_credits_file(deps: Dict[str, List[Dict[str, str]]],
-                          output: Path) -> None:
+def generate_credits_file(deps: Dict[str, List[Dict[str, str]]], output: Path) -> None:
     if deps:
-        template = Template(
-            ('- "[$files]($source)" by **$author** licensed'
-             ' under [$license](https://spdx.org/licenses/$license.html)\n'))
+        template = Template((
+            '- "[$files]($source)" by **$author** licensed'
+            ' under [$license](https://spdx.org/licenses/$license.html)\n'
+        ))
 
         with open(output, "w+") as file:
             file.writelines("# Credits\n\n")
@@ -67,18 +62,3 @@ def generate_credits_file(deps: Dict[str, List[Dict[str, str]]],
     else:
         if os.path.exists(output):
             os.remove(output)
-
-
-def main() -> None:
-    parser = ArgumentParser(description='Generate a CREDITS.md file.')
-    parser.add_argument('--dep5-file', default='.reuse/dep5', type=Path)
-    parser.add_argument('--output', default='CREDITS.md', type=Path)
-
-    options = parser.parse_args()
-
-    deps = parse_dep5_file(options.dep5_file)
-    generate_credits_file(deps, options.output)
-
-
-if __name__ == "__main__":
-    main()
