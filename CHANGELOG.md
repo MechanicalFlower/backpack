@@ -16,6 +16,6 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Dependencies
 - Bump `sigstore/gh-action-sigstore-python` from 2.0.1 to 2.1.0 ([#6](https://github.com/MechanicalFlower/magic_combo/pull/6))
 - Bump `actions/checkout` from 2 to 4 ([#13](https://github.com/MechanicalFlower/magic_combo/pull/13))
+- Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
 
 [Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...HEAD
-- Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
