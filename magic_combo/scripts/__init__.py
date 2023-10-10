@@ -11,6 +11,7 @@ from .generate_credits import generate_credits_file, parse_dep5_file
 
 
 @task(
+    name="bump_version",
     help={
         "version_file": "A path to a version file. (default: .version)",
         "cfg_file": "A path to a presets file. (default: export_presets.cfg)",
@@ -18,7 +19,7 @@ from .generate_credits import generate_credits_file, parse_dep5_file
     },
     optional=['version', 'version_file', 'cfg_file']
 )
-def bump_version(
+def bump_version_(
     c: Context,
     version: Optional[str] = None,
     version_file: Path = Path(".version"),
@@ -35,13 +36,14 @@ def bump_version(
 
 
 @task(
+    name="generate_credits",
     help={
         "dep5_file": "A path to a dep5 file. (default: .reuse/dep5)",
         "output": "A path for the output credit file. (default: CREDITS.md)",
     },
     optional=['dep5_file', 'output']
 )
-def generate_credits(
+def generate_credits_(
     c: Context,
     dep5_file: Path = Path(".reuse/dep5"),
     output: Path = Path("CREDITS.md")
@@ -54,5 +56,5 @@ def generate_credits(
 
 
 script_ns = Collection('script')
-script_ns.add_task(bump_version)
-script_ns.add_task(generate_credits)
+script_ns.add_task(bump_version_)
+script_ns.add_task(generate_credits_)
