@@ -25,6 +25,7 @@ jobs:
             tasks
             dependabot
             workflows
+            publish
             readme
             changelog
             deps
