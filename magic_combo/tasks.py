@@ -29,23 +29,22 @@ def cmd(c: Context, command: String, *arguments: String) -> Any:
 
 
 class CmdBuilder:
-
     def __init__(self, c: Context) -> None:
         self.c = c
         self._args: Iterable[str] = []
-        self._cmd: str = ''
+        self._cmd: str = ""
 
     def run(self) -> Any:
-        return self.c.run(' '.join([self._cmd, *self._args]))
+        return self.c.run(" ".join([self._cmd, *self._args]))
 
-    def cmd(self, cmd: String) -> 'CmdBuilder':
+    def cmd(self, cmd: String) -> "CmdBuilder":
         self._cmd = str(cmd)
         return self
 
-    def godot(self) -> 'CmdBuilder':
+    def godot(self) -> "CmdBuilder":
         return self.cmd(COMBO_BIN_PATH / ConfigWrapper.godot_filename(self.c))
 
-    def args(self, *args: String) -> 'CmdBuilder':
+    def args(self, *args: String) -> "CmdBuilder":
         self._args = [str(arg) for arg in args]
         return self
 
@@ -71,8 +70,11 @@ def install_godot(c: Context) -> None:
         COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip",
     )
     cmd(
-        c, "unzip", COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip", "-d",
-        COMBO_CACHE_PATH
+        c,
+        "unzip",
+        COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip",
+        "-d",
+        COMBO_CACHE_PATH,
     )
     cmd(
         c,
@@ -93,16 +95,23 @@ def install_templates(c: Context) -> None:
         COMBO_CACHE_PATH / ConfigWrapper.godot_template(c),
     )
     cmd(
-        c, "unzip", COMBO_CACHE_PATH / ConfigWrapper.godot_template(c), "-d",
-        COMBO_CACHE_PATH
+        c,
+        "unzip",
+        COMBO_CACHE_PATH / ConfigWrapper.godot_template(c),
+        "-d",
+        COMBO_CACHE_PATH,
     )
     cmd(
-        c, "mkdir", "--parents",
-        f"~/.local/share/godot/export_templates/{ConfigWrapper.godot_version(c)}.{ConfigWrapper.godot_release(c)}"
+        c,
+        "mkdir",
+        "--parents",
+        f"~/.local/share/godot/export_templates/{ConfigWrapper.godot_version(c)}.{ConfigWrapper.godot_release(c)}",
     )
     cmd(
-        c, "cp", COMBO_CACHE_PATH / "templates/*",
-        f"~/.local/share/godot/export_templates/{ConfigWrapper.godot_version(c)}.{ConfigWrapper.godot_release(c)}"
+        c,
+        "cp",
+        COMBO_CACHE_PATH / "templates/*",
+        f"~/.local/share/godot/export_templates/{ConfigWrapper.godot_version(c)}.{ConfigWrapper.godot_release(c)}",
     )
 
 
@@ -144,7 +153,8 @@ def export_release_linux(c: Context) -> None:
         export_dir / f"{ConfigWrapper.game_name(c)}.x86_64",
     )
     zip_filename = "%s-linux-v%s.zip" % (
-        ConfigWrapper.game_name(c), ConfigWrapper.game_version(c)
+        ConfigWrapper.game_name(c),
+        ConfigWrapper.game_version(c),
     )
     cmd(
         c,
@@ -167,12 +177,15 @@ def export_release_windows(c: Context) -> None:
     export_dir = COMBO_BUILD_PATH / "windows"
     cmd(c, "mkdir", "--parents", export_dir)
     cmd(
-        c, "godot", "--export-release 'Windows Desktop'"
-        "--headless", export_dir / f"{ConfigWrapper.game_name(c)}.exe"
+        c,
+        "godot",
+        "--export-release 'Windows Desktop'" "--headless",
+        export_dir / f"{ConfigWrapper.game_name(c)}.exe",
     )
 
     zip_filename = "%s-windows-v%s.zip" % (
-        ConfigWrapper.game_name(c), ConfigWrapper.game_version(c)
+        ConfigWrapper.game_name(c),
+        ConfigWrapper.game_version(c),
     )
     cmd(
         c,
@@ -193,11 +206,13 @@ def export_release_windows(c: Context) -> None:
 @task()
 def export_release_mac(c: Context) -> None:
     cmd(
-        c, "godot", "--export-release 'macOS'"
-        "--headless", (
-            COMBO_BUILD_PATH /
-            f"{ConfigWrapper.game_name(c)}-mac-v{ConfigWrapper.game_version(c)}.zip"
-        )
+        c,
+        "godot",
+        "--export-release 'macOS'" "--headless",
+        (
+            COMBO_BUILD_PATH
+            / f"{ConfigWrapper.game_name(c)}-mac-v{ConfigWrapper.game_version(c)}.zip"
+        ),
     )
 
 
@@ -240,7 +255,7 @@ def clean_plug(c: Context) -> None:
     )
 
 
-task_ns = Collection('task')
+task_ns = Collection("task")
 task_ns.add_task(clean_godot)
 task_ns.add_task(clean_combo)
 task_ns.add_task(clean_plug)

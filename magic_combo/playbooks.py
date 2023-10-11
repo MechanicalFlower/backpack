@@ -24,7 +24,11 @@ def clean(c: Context) -> None:
 
 @task(
     pre=[
-        clean_godot, clean_plug, install_addons, import_resources, export_release_linux
+        clean_godot,
+        clean_plug,
+        install_addons,
+        import_resources,
+        export_release_linux,
     ]
 )
 def build(c: Context) -> None:
@@ -43,15 +47,19 @@ def export_release_all(c: Context) -> None:
 
 @task(
     pre=[
-        clean, install_godot, install_templates, install_addons, import_resources,
-        export_release_all
+        clean,
+        install_godot,
+        install_templates,
+        install_addons,
+        import_resources,
+        export_release_all,
     ]
 )
 def ci_build(c: Context) -> None:
     pass
 
 
-playbook_ns = Collection('playbook')
+playbook_ns = Collection("playbook")
 playbook_ns.add_task(clean)
 playbook_ns.add_task(build)
 playbook_ns.add_task(run)

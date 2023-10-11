@@ -6,24 +6,23 @@ from .scripts.bump_version import read_version_file
 
 
 class ConfigWrapper:
-
     @staticmethod
     def godot_version(c: Context) -> str:
-        if c['godot']['version_file'] is not None:
-            return read_version_file(Path(c['godot']['version_file']))
-        return str(c['godot']['version'])
+        if c["godot"]["version_file"] is not None:
+            return read_version_file(Path(c["godot"]["version_file"]))
+        return str(c["godot"]["version"])
 
     @staticmethod
     def godot_release(c: Context) -> str:
-        return str(c['godot']['release'])
+        return str(c["godot"]["release"])
 
     @staticmethod
     def godot_subdir(c: Context) -> str:
-        return str(c['godot']['subdir'])
+        return str(c["godot"]["subdir"])
 
     @staticmethod
     def godot_platform(c: Context) -> str:
-        return str(c['godot']['platform'])
+        return str(c["godot"]["platform"])
 
     @staticmethod
     def godot_filename(c: Context) -> str:
@@ -41,10 +40,10 @@ class ConfigWrapper:
 
     @staticmethod
     def game_name(c: Context) -> str:
-        return str(c['game']['name'])
+        return str(c["game"]["name"])
 
     @staticmethod
     def game_version(c: Context) -> str:
-        if c['game']['version_file'] is not None:
-            return read_version_file(Path(c['game']['version_file']))
-        return str(c['game']['version'])
+        if c["game"]["version_file"] is not None:
+            return read_version_file(Path(c["game"]["version_file"]))
+        return str(c["game"]["version"])

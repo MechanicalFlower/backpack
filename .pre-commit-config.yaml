@@ -20,10 +20,10 @@ repos:
     args: ["--toml", "pyproject.toml"]
     additional_dependencies:
     - tomli
-- repo: https://github.com/google/yapf
-  rev: v0.40.1
+- repo: https://github.com/psf/black
+  rev: 23.9.1
   hooks:
-  - id: yapf
+  - id: black
 - repo: https://github.com/PyCQA/isort
   rev: 5.12.0
   hooks:

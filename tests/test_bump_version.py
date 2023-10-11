@@ -7,11 +7,10 @@ from magic_combo.scripts.bump_version import replace_version
 
 
 class TestBumpVersion:
-
     def test_0001_bump_version(self, tmpdir, mocker, script_loc):
         mocker.patch(
-            'magic_combo.scripts.bump_version.get_today',
-            return_value=datetime(2014, 6, 2)
+            "magic_combo.scripts.bump_version.get_today",
+            return_value=datetime(2014, 6, 2),
         )
 
         input_cfg_file = script_loc.joinpath("resources/bump_version/input_presets.cfg")
