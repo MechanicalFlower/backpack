@@ -3,6 +3,15 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+### Dependencies
+
+## [0.2.0]
+### Added
 - Add Pull Request title linter in CI ([#9](https://github.com/MechanicalFlower/magic_combo/pull/9))
 - Add support for python versions from 3.10 to 3.12 ([#10](https://github.com/MechanicalFlower/magic_combo/pull/10))
 - Add link checker in CI ([#11](https://github.com/MechanicalFlower/magic_combo/pull/11))
@@ -18,4 +27,5 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `actions/checkout` from 2 to 4 ([#13](https://github.com/MechanicalFlower/magic_combo/pull/13))
 - Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
 
-[Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...0.2.0
