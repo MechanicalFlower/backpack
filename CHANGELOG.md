@@ -3,6 +3,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Add Github release creation in CD ([#15](https://github.com/MechanicalFlower/magic_combo/pull/15))
 ### Changed
 ### Deprecated
 ### Removed
