@@ -30,6 +30,10 @@ pytest = "^7.4.2"
 pytest-mock = "^3.11.1"
 nox = "^2023.4.22"
 
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/MechanicalFlower/magic_combo/issues"
+"Changelog" = "https://github.com/MechanicalFlower/magic_combo/blob/main/CHANGELOG.md"
+
 [tool.yapf]
 based_on_style = "pep8"
 spaces_before_comment = 2
