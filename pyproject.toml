@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "magic_combo"
-version = "0.2.0"
+version = "0.2.1"
 description = "Utilities for games project management"
 license = "MIT"
 authors = ["Florian Vazelle <florian.vazelle@vivaldi.net>"]

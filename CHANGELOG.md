@@ -3,6 +3,15 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+### Dependencies
+
+## [0.2.1]
+### Added
 - Add Github release creation in CD ([#15](https://github.com/MechanicalFlower/magic_combo/pull/15))
 - Add urls to pyproject.toml ([#16](https://github.com/MechanicalFlower/magic_combo/pull/16))
 ### Changed
@@ -31,5 +40,6 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `actions/checkout` from 2 to 4 ([#13](https://github.com/MechanicalFlower/magic_combo/pull/13))
 - Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
 
-[Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...0.2.0
