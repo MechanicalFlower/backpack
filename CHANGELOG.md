@@ -10,6 +10,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Correctly define default values ([#18](https://github.com/MechanicalFlower/magic_combo/pull/18))
 ### Security
 ### Dependencies
 
