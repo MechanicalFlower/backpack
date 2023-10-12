@@ -12,7 +12,7 @@
 ![PyPI - Package Version](https://img.shields.io/pypi/v/magic_combo?logo=pypi&logoColor=white)
 
 [![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff)
-[![format - yapf](https://img.shields.io/badge/format-yapf-000000.svg)](https://github.com/google/yapf)
+[![format - black](https://img.shields.io/badge/format-black-000000.svg)](https://github.com/psf/black)
 [![types - mypy](https://img.shields.io/badge/types-mypy-blue.svg)](https://github.com/python/mypy)
 
 A collection of Python utilities for seamless

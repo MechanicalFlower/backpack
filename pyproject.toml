@@ -34,15 +34,8 @@ nox = "^2023.4.22"
 "Bug Tracker" = "https://github.com/MechanicalFlower/magic_combo/issues"
 "Changelog" = "https://github.com/MechanicalFlower/magic_combo/blob/main/CHANGELOG.md"
 
-[tool.yapf]
-based_on_style = "pep8"
-spaces_before_comment = 2
-column_limit = 88
-blank_lines_around_top_level_definition = 2
-blank_lines_between_top_level_imports_and_variables = 1
-coalesce_brackets = true
-dedent_closing_brackets = true
-disable_ending_comma_heuristic = false
+[tool.black]
+target-version = ["py310"]
 
 [tool.isort]
 multi_line_output = 3

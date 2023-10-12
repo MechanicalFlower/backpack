@@ -7,7 +7,6 @@ from magic_combo.scripts.generate_credits import (
 
 
 class TestGenerateCredits:
-
     def test_0001_generate_credits(self, tmpdir, script_loc):
         input_dep5 = script_loc.joinpath("resources/generate_credits/input_dep5")
         output_credits_file = tmpdir.mkdir("results").join("CREDITS.md")

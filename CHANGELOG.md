@@ -6,6 +6,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add Github release creation in CD ([#15](https://github.com/MechanicalFlower/magic_combo/pull/15))
 - Add urls to pyproject.toml ([#16](https://github.com/MechanicalFlower/magic_combo/pull/16))
 ### Changed
+- Use black as formatter instead of yapf ([#17](https://github.com/MechanicalFlower/magic_combo/pull/17))
 ### Deprecated
 ### Removed
 ### Fixed
