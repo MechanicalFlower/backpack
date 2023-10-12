@@ -10,6 +10,16 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Security
 ### Dependencies
 
+## [0.2.2]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- Correctly create Github release in CD ([#19](https://github.com/MechanicalFlower/magic_combo/pull/19))
+### Security
+### Dependencies
+
 ## [0.2.1]
 ### Added
 - Add Github release creation in CD ([#15](https://github.com/MechanicalFlower/magic_combo/pull/15))
@@ -41,5 +51,6 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
 
 [Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.1...HEAD
+[0.2.2]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...0.2.0
