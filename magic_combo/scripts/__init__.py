@@ -6,6 +6,7 @@ from invoke.collection import Collection
 from invoke.context import Context
 from invoke.tasks import task
 
+from ..config import ConfigWrapper
 from .bump_version import read_version_file, replace_version
 from .generate_credits import generate_credits_file, parse_dep5_file
 
@@ -28,9 +29,12 @@ def bump_version_(
     """
     Updates the game version for export.
     """
-    game_version = packaging.version.parse(
-        read_version_file(version_file) if version is None else version
-    )
+    try:
+        game_version = packaging.version.parse(
+            read_version_file(version_file) if version is None else version
+        )
+    except Exception:
+        game_version = packaging.version.parse(ConfigWrapper.game_version(c))
 
     replace_version(game_version, cfg_file)
 
@@ -53,6 +57,13 @@ def generate_credits_(
     generate_credits_file(deps, output)
 
 
+@task(name="add_config_to_github_env")
+def add_config_to_github_env_(c: Context) -> None:
+    c.run(f'echo "godot_version={ConfigWrapper.godot_version(c)}" >> $GITHUB_ENV"')
+    c.run(f'echo "game_version={ConfigWrapper.game_version(c)}" >> $GITHUB_ENV"')
+
+
 script_ns = Collection("script")
 script_ns.add_task(bump_version_)
 script_ns.add_task(generate_credits_)
+script_ns.add_task(add_config_to_github_env_)

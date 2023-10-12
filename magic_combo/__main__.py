@@ -1,4 +1,5 @@
 import sys
+from typing import Any, Dict
 
 from invoke.collection import Collection
 from invoke.config import Config
@@ -12,26 +13,25 @@ from .tasks import task_ns
 class ComboConfig(Config):
     prefix = "combo"
 
-
-def main() -> None:
-    ns = Collection(playbook_ns, task_ns, script_ns)
-    ns.configure(
-        {
+    @staticmethod
+    def global_defaults() -> Dict[str, Any]:
+        return {
+            **Config.global_defaults(),
             "godot": {
-                "version": "4.1.1",
-                "version_file": None,
+                "version": "4.1.2",
                 "release": "stable",
                 "subdir": "",
                 "platform": "linux.x86_64",
             },
             "game": {
-                # 'name': None,
+                "name": None,
                 "version": "0.1.0",
-                "version_file": None,
             },
         }
-    )
 
+
+def main() -> None:
+    ns = Collection(playbook_ns, task_ns, script_ns)
     program = Program(version="0.2.0", namespace=ns, config_class=ComboConfig)
     program.run()
     sys.exit(1)
