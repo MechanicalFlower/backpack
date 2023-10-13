@@ -32,9 +32,9 @@ class ComboConfig(Config):
 
 def main() -> None:
     ns = Collection(playbook_ns, task_ns, script_ns)
-    program = Program(version="0.2.2", namespace=ns, config_class=ComboConfig)
+    program = Program(version="0.2.3", namespace=ns, config_class=ComboConfig)
     program.run()
-    sys.exit(1)
+    sys.exit(0)
 
 
 main()

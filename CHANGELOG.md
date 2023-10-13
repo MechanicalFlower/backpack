@@ -10,15 +10,13 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Security
 ### Dependencies
 
+## [0.2.3]
+### Fixed
+- Remove unexcepted quotation mark ([#20](https://github.com/MechanicalFlower/magic_combo/pull/20))
+
 ## [0.2.2]
-### Added
-### Changed
-### Deprecated
-### Removed
 ### Fixed
 - Correctly create Github release in CD ([#19](https://github.com/MechanicalFlower/magic_combo/pull/19))
-### Security
-### Dependencies
 
 ## [0.2.1]
 ### Added
@@ -26,12 +24,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add urls to pyproject.toml ([#16](https://github.com/MechanicalFlower/magic_combo/pull/16))
 ### Changed
 - Use black as formatter instead of yapf ([#17](https://github.com/MechanicalFlower/magic_combo/pull/17))
-### Deprecated
-### Removed
 ### Fixed
 - Correctly define default values ([#18](https://github.com/MechanicalFlower/magic_combo/pull/18))
-### Security
-### Dependencies
 
 ## [0.2.0]
 ### Added
@@ -41,16 +35,13 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Update the README to make it standard ([#8](https://github.com/MechanicalFlower/magic_combo/pull/8))
 - Refactor scripts to use it as one program with pyinvoke ([#5](https://github.com/MechanicalFlower/magic_combo/pull/5))
-### Deprecated
-### Removed
-### Fixed
-### Security
 ### Dependencies
 - Bump `sigstore/gh-action-sigstore-python` from 2.0.1 to 2.1.0 ([#6](https://github.com/MechanicalFlower/magic_combo/pull/6))
 - Bump `actions/checkout` from 2 to 4 ([#13](https://github.com/MechanicalFlower/magic_combo/pull/13))
 - Bump `stefanzweifel/git-auto-commit-action` from 4 to 5 ([#12](https://github.com/MechanicalFlower/magic_combo/pull/12))
 
-[Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.1...HEAD
+[Unreleased]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.3...HEAD
+[0.2.3]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/MechanicalFlower/magic_combo/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/MechanicalFlower/magic_combo/compare/0.1.1...0.2.0
