@@ -59,8 +59,8 @@ def generate_credits_(
 
 @task(name="add_config_to_github_env")
 def add_config_to_github_env_(c: Context) -> None:
-    c.run(f'echo "godot_version={ConfigWrapper.godot_version(c)}" >> $GITHUB_ENV"')
-    c.run(f'echo "game_version={ConfigWrapper.game_version(c)}" >> $GITHUB_ENV"')
+    c.run(f'echo "godot_version={ConfigWrapper.godot_version(c)}" >> $GITHUB_ENV')
+    c.run(f'echo "game_version={ConfigWrapper.game_version(c)}" >> $GITHUB_ENV')
 
 
 script_ns = Collection("script")
