@@ -12,11 +12,11 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [0.2.3]
 ### Fixed
-- Remove unexcepted quotation mark ([#20](https://github.com/MechanicalFlower/magic_combo/pull/20))
+- Remove unexcepted quotation mark ([#21](https://github.com/MechanicalFlower/magic_combo/pull/21))
 
 ## [0.2.2]
 ### Fixed
-- Correctly create Github release in CD ([#19](https://github.com/MechanicalFlower/magic_combo/pull/19))
+- Correctly create Github release in CD ([#20](https://github.com/MechanicalFlower/magic_combo/pull/20))
 
 ## [0.2.1]
 ### Added
