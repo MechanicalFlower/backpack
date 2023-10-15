@@ -1,0 +1,13 @@
+name: Test Action
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: List commands
+        uses: ./ # Uses an action in the root directory
+        with:
+           command: '--list'
