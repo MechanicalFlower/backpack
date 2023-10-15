@@ -1,8 +1,14 @@
 import re
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
+import packaging
+from invoke.context import Context
+from invoke.tasks import task
 from packaging import version
+
+from ..config import ConfigWrapper
 
 
 def get_today() -> datetime:
@@ -85,3 +91,30 @@ def replace_version(
         f'application/short_version="{short_version}"',
         output_cfg_file,
     )
+
+
+@task(
+    help={
+        "version_file": "A path to a version file. (default: .version)",
+        "cfg_file": "A path to a presets file. (default: export_presets.cfg)",
+        "version": "Override the version-file, if it's pass. (default: None)",
+    },
+    optional=["version", "version_file", "cfg_file"],
+)
+def bump_version(
+    c: Context,
+    version: Optional[str] = None,
+    version_file: Path = Path(".version"),
+    cfg_file: Path = Path("export_presets.cfg"),
+) -> None:
+    """
+    Updates the game version for export.
+    """
+    try:
+        game_version = packaging.version.parse(
+            read_version_file(version_file) if version is None else version
+        )
+    except Exception:
+        game_version = packaging.version.parse(ConfigWrapper.game_version(c))
+
+    replace_version(game_version, cfg_file)

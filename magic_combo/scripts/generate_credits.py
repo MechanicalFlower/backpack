@@ -3,6 +3,9 @@ from pathlib import Path
 from string import Template
 from typing import Dict, List, Optional
 
+from invoke.context import Context
+from invoke.tasks import task
+
 
 def parse_dep5_file(source: Path) -> Dict[str, List[Dict[str, str]]]:
     deps: Dict[str, List[Dict[str, str]]] = {}
@@ -64,3 +67,20 @@ def generate_credits_file(deps: Dict[str, List[Dict[str, str]]], output: Path) -
     else:
         if os.path.exists(output):
             os.remove(output)
+
+
+@task(
+    help={
+        "dep5_file": "A path to a dep5 file. (default: .reuse/dep5)",
+        "output": "A path for the output credit file. (default: CREDITS.md)",
+    },
+    optional=["dep5_file", "output"],
+)
+def generate_credits(
+    c: Context, dep5_file: Path = Path(".reuse/dep5"), output: Path = Path("CREDITS.md")
+) -> None:
+    """
+    Generate a CREDITS.md file.
+    """
+    deps = parse_dep5_file(dep5_file)
+    generate_credits_file(deps, output)

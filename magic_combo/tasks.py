@@ -1,52 +1,20 @@
 from pathlib import Path
-from typing import Any, Iterable
 
 from invoke.collection import Collection
 from invoke.context import Context
 from invoke.tasks import task
 
+from .command import cmd
 from .config import ConfigWrapper
-
-GODOT_URL = "https://downloads.tuxfamily.org/godotengine"
-
-COMBO_PATH = Path(".combo")
-
-COMBO_CACHE_PATH = COMBO_PATH.joinpath("cache")
-COMBO_BIN_PATH = COMBO_PATH.joinpath("bin")
-COMBO_BUILD_PATH = COMBO_PATH.joinpath("build")
+from .constants import (
+    COMBO_BIN_PATH,
+    COMBO_BUILD_PATH,
+    COMBO_CACHE_PATH,
+    COMBO_PATH,
+    GODOT_URL,
+)
 
 String = str | Path
-
-
-def cmd(c: Context, command: String, *arguments: String) -> Any:
-    builder = CmdBuilder(c)
-    if command == "godot":
-        builder = builder.godot()
-    else:
-        builder = builder.cmd(command)
-    builder = builder.args(*arguments)
-    return builder.run()
-
-
-class CmdBuilder:
-    def __init__(self, c: Context) -> None:
-        self.c = c
-        self._args: Iterable[str] = []
-        self._cmd: str = ""
-
-    def run(self) -> Any:
-        return self.c.run(" ".join([self._cmd, *self._args]))
-
-    def cmd(self, cmd: String) -> "CmdBuilder":
-        self._cmd = str(cmd)
-        return self
-
-    def godot(self) -> "CmdBuilder":
-        return self.cmd(COMBO_BIN_PATH / ConfigWrapper.godot_filename(self.c))
-
-    def args(self, *args: String) -> "CmdBuilder":
-        self._args = [str(arg) for arg in args]
-        return self
 
 
 @task()
@@ -90,7 +58,7 @@ def install_templates(c: Context) -> None:
         c,
         "curl",
         "-X GET",
-        "'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_template(c)}'",
+        f"'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_template(c)}'",
         "--output",
         COMBO_CACHE_PATH / ConfigWrapper.godot_template(c),
     )
@@ -156,19 +124,7 @@ def export_release_linux(c: Context) -> None:
         ConfigWrapper.game_name(c),
         ConfigWrapper.game_version(c),
     )
-    cmd(
-        c,
-        "cd",
-        export_dir,
-        "&&",
-        "zip",
-        zip_filename,
-        "-r",
-        ".",
-        "&&",
-        "cd",
-        "-",
-    )
+    cmd(c, "cd", export_dir, "&&", "zip", zip_filename, "-r", ".", "&&", "cd", "-")
     cmd(c, "mv", (export_dir / zip_filename), (COMBO_BUILD_PATH / zip_filename))
 
 
@@ -187,19 +143,7 @@ def export_release_windows(c: Context) -> None:
         ConfigWrapper.game_name(c),
         ConfigWrapper.game_version(c),
     )
-    cmd(
-        c,
-        "cd",
-        export_dir,
-        "&&",
-        "zip",
-        zip_filename,
-        "-r",
-        ".",
-        "&&",
-        "cd",
-        "-",
-    )
+    cmd(c, "cd", export_dir, "&&", "zip", zip_filename, "-r", ".", "&&", "cd", "-")
     cmd(c, "mv", export_dir / zip_filename, COMBO_BUILD_PATH / zip_filename)
 
 
