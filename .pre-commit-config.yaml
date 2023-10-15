@@ -63,5 +63,6 @@ repos:
           CONTRIBUTING.md|
           CREDITS.md|
           LICENSE.md|
-          README.md
+          README.md|
+          Dockerfile
       )

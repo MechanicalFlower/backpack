@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: List commands
-        uses: ./ # Uses an action in the root directory
+        uses: ./
         with:
            command: '--list'
