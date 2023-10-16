@@ -4,6 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 - Add Dockerfile and Github action ([#24](https://github.com/MechanicalFlower/magic_combo/pull/24))
+- Add command to easily setup new project ([#23](https://github.com/MechanicalFlower/magic_combo/pull/23))
 ### Changed
 ### Deprecated
 ### Removed
