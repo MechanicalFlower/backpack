@@ -34,6 +34,7 @@ def install_godot(c: Context) -> None:
         "curl",
         "-X GET",
         f"'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_filename(c)}.zip'",
+        "--no-clobber",
         "--output",
         COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip",
     )
@@ -59,6 +60,7 @@ def install_templates(c: Context) -> None:
         "curl",
         "-X GET",
         f"'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_template(c)}'",
+        "--no-clobber",
         "--output",
         COMBO_CACHE_PATH / ConfigWrapper.godot_template(c),
     )
@@ -85,28 +87,12 @@ def install_templates(c: Context) -> None:
 
 @task(pre=[makedirs])
 def install_addons(c: Context) -> None:
-    cmd(
-        c,
-        "godot",
-        "--headless",
-        "--script",
-        "plug.gd",
-        "install",
-        "||",
-        "true",
-    )
+    cmd(c, "godot", "--headless", "--script", "plug.gd", "install", "||", "true")
 
 
 @task(pre=[makedirs])
 def import_resources(c: Context) -> None:
-    cmd(
-        c,
-        "godot",
-        "--headless",
-        "--export-pack",
-        "null",
-        "/dev/null",
-    )
+    cmd(c, "godot", "--headless", "--export-pack", "null", "/dev/null")
 
 
 @task()
@@ -153,10 +139,8 @@ def export_release_mac(c: Context) -> None:
         c,
         "godot",
         "--export-release 'macOS'" "--headless",
-        (
-            COMBO_BUILD_PATH
-            / f"{ConfigWrapper.game_name(c)}-mac-v{ConfigWrapper.game_version(c)}.zip"
-        ),
+        COMBO_BUILD_PATH
+        / f"{ConfigWrapper.game_name(c)}-mac-v{ConfigWrapper.game_version(c)}.zip",
     )
 
 
