@@ -1,26 +1,27 @@
-FROM python:3.11-buster as builder
+# builder stage
 
-RUN pip install poetry==1.6.1
+ARG PYTHON_VERSION=3.11
 
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+FROM python:${PYTHON_VERSION}-buster as builder
+
+ARG POETRY_VERSION=1.6.1
+
+RUN pip install poetry==${POETRY_VERSION}
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
-RUN touch README.md
+COPY . .
 
-RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --no-root
+RUN poetry build --format wheel
 
-FROM python:3.11-slim-buster as runtime
+# runtime stage
 
-ENV VIRTUAL_ENV=/app/.venv \
-    PATH="/app/.venv/bin:$PATH"
+ARG PYTHON_VERSION=3.11
 
-COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+FROM python:${PYTHON_VERSION}-slim-buster as runtime
 
-COPY magic_combo ./magic_combo
+COPY --from=builder /app/dist/ .
 
-ENTRYPOINT ["python", "-m", "magic_combo.__main__"]
+RUN pip install /magic_combo-*.whl
+
+ENTRYPOINT ["magic_combo"]
