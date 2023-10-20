@@ -13,6 +13,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Security
 ### Dependencies
 - Bump `pre-commit` from 3.4.0 to 3.5.0 ([#25](https://github.com/MechanicalFlower/magic_combo/pull/25))
+- Bump `pytest-mock` from 3.11.1 to 3.12.0 ([#28](https://github.com/MechanicalFlower/magic_combo/pull/28))
 
 ## [0.2.3]
 ### Fixed
