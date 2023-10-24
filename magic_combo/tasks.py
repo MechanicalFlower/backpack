@@ -27,7 +27,7 @@ def makedirs(c: Context) -> None:
     cmd(c, "touch", COMBO_PATH / ".gdignore")
 
 
-@task()
+@task(pre=[makedirs])
 def install_godot(c: Context) -> None:
     cmd(
         c,
@@ -53,7 +53,7 @@ def install_godot(c: Context) -> None:
     )
 
 
-@task()
+@task(pre=[makedirs])
 def install_templates(c: Context) -> None:
     cmd(
         c,
