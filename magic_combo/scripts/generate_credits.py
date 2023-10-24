@@ -53,7 +53,7 @@ def generate_credits_file(deps: Dict[str, List[Dict[str, str]]], output: Path) -
         template = Template(
             (
                 '- "[$files]($source)" by **$author** licensed'
-                " under [$license](https://spdx.org/licenses/$license.html)\n"
+                " under [$license](./LICENSES/$license.txt)\n"
             )
         )
 
