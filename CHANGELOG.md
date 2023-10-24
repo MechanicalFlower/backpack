@@ -11,6 +11,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Removed
 ### Fixed
 - Use the magic combo cli in the Dockerfile ([#27](https://github.com/MechanicalFlower/magic_combo/pull/27))
+- Use local links for license files when generate CREDITS.md ([#29](https://github.com/MechanicalFlower/magic_combo/pull/29))
 ### Security
 ### Dependencies
 - Bump `pre-commit` from 3.4.0 to 3.5.0 ([#25](https://github.com/MechanicalFlower/magic_combo/pull/25))
