@@ -76,15 +76,16 @@ To list all sucommands, run:
 $ magic_combo --list
 Subcommands:
 
-  playbook.build
-  playbook.ci-build
-  playbook.clean
-  playbook.export-release-all
-  playbook.run
-  script.bump-version           Updates the game
-                                version for export.
-  script.generate-credits       Generate a
-                                CREDITS.md file.
+  playbook.build                    Build godot game for Linux.
+  playbook.clean                    Clean combo, godot and plug caches.
+  playbook.export                   Release export for any platform.
+  playbook.run                      Build and run godot game for Linux.
+  script.add-config-to-github-env   Add 'godot_version' and 'game_version'
+                                    to Github env.
+  script.bump-version               Updates the game version for export.
+  script.generate-credits           Generate a CREDITS.md file.
+  script.new                        Create a new godot game project, based
+                                    on MechanicalFlower/godot-template.
   task.clean-combo
   task.clean-godot
   task.clean-plug
