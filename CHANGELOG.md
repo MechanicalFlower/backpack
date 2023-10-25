@@ -9,6 +9,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 ### Security
 ### Dependencies
+- Bump `pytest` from 7.4.2 to 7.4.3 ([#33](https://github.com/MechanicalFlower/magic_combo/pull/33))
 
 ## [0.2.4]
 ### Added
