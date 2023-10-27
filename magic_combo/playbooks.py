@@ -16,6 +16,7 @@ from .tasks import (
     install_godot,
     install_templates,
     run_release,
+    sys_platform_to_export_supported_plateform,
 )
 
 
@@ -35,14 +36,20 @@ def clean(c: Context) -> None:
         install_templates,
         install_addons,
         import_resources,
-        export_release_linux,
     ]
 )
 def build(c: Context) -> None:
     """
     Build godot game for Linux.
     """
-    pass
+    platform = sys_platform_to_export_supported_plateform()
+
+    if platform == "linux":
+        export_release_linux(c)
+    elif platform == "windows":
+        export_release_windows(c)
+    elif platform == "mac":
+        export_release_mac(c)
 
 
 @task(pre=[build, run_release])
@@ -56,7 +63,7 @@ def run(c: Context) -> None:
 @task(
     help={
         "platforms": "Comma separated list of platform to export",
-        "all": "Export to all platform",
+        "all": "Export to all platforms",
     },
     optional=["platform", "all"],
 )

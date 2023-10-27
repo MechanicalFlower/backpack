@@ -1,0 +1,4 @@
+# Config file for test purpose
+game:
+  name: magic_combo
+  version: '1.0.0'

@@ -1,4 +1,6 @@
+import sys
 from pathlib import Path
+from typing import Literal, Optional
 
 from invoke.collection import Collection
 from invoke.context import Context
@@ -11,10 +13,21 @@ from .constants import (
     COMBO_BUILD_PATH,
     COMBO_CACHE_PATH,
     COMBO_PATH,
-    GODOT_URL,
 )
 
 String = str | Path
+
+
+def sys_platform_to_export_supported_plateform() -> (
+    Optional[Literal["linux"] | Literal["windows"] | Literal["mac"]]
+):
+    if sys.platform in ("linux", "linux2"):
+        return "linux"
+    elif sys.platform in ("win32", "cygwin", "msys"):
+        return "windows"
+    elif sys.platform in ("darwin",):
+        return "mac"
+    return None
 
 
 @task()
@@ -33,7 +46,7 @@ def install_godot(c: Context) -> None:
         c,
         "curl",
         "-X GET",
-        f"'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_filename(c)}.zip'",
+        f"'{ConfigWrapper.godot_filename_url(c)}'",
         "--no-clobber",
         "--output",
         COMBO_CACHE_PATH / f"{ConfigWrapper.godot_filename(c)}.zip",
@@ -59,7 +72,7 @@ def install_templates(c: Context) -> None:
         c,
         "curl",
         "-X GET",
-        f"'{GODOT_URL}/{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/{ConfigWrapper.godot_template(c)}'",
+        f"'{ConfigWrapper.godot_template_url(c)}'",
         "--no-clobber",
         "--output",
         COMBO_CACHE_PATH / ConfigWrapper.godot_template(c),
@@ -156,7 +169,14 @@ def godot(c: Context) -> None:
 
 @task()
 def run_release(c: Context) -> None:
-    cmd(c, COMBO_BUILD_PATH / "linux" / f"{ConfigWrapper.game_name(c)}.x86_64")
+    platform = sys_platform_to_export_supported_plateform()
+
+    if platform == "linux":
+        cmd(c, COMBO_BUILD_PATH / "linux" / f"{ConfigWrapper.game_name(c)}.x86_64")
+    elif platform == "windows":
+        cmd(c, COMBO_BUILD_PATH / "windows" / f"{ConfigWrapper.game_name(c)}.exe")
+    elif platform == "mac":
+        raise NotImplementedError()
 
 
 @task()
