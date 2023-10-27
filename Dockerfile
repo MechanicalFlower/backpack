@@ -24,4 +24,4 @@ COPY --from=builder /app/dist/ .
 
 RUN pip install /magic_combo-*.whl
 
-ENTRYPOINT ["magic_combo"]
+ENTRYPOINT ["/bin/sh", "-c"]

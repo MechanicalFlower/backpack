@@ -10,11 +10,11 @@ jobs:
       - name: List commands
         uses: ./
         with:
-           command: '--list'
+           command: 'magic_combo --list'
       - name: Set config
         uses: ./
         with:
-           command: '-f .combo.yaml script.add-config-to-github-env'
+           command: 'magic_combo -f .combo.yaml script.add-config-to-github-env'
       - name: Check config
         run: |
           [ ${{ env.game_name }} == 'magic_combo' ] && [ ${{ env.game_version }} == '1.0.0' ] || exit 1
