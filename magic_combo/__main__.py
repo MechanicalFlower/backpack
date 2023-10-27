@@ -25,7 +25,7 @@ class ComboConfig(Config):
             },
             "game": {
                 "name": None,
-                "version": "0.1.0",
+                "version": None,
             },
         }
 

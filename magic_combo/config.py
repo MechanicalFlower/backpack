@@ -1,5 +1,7 @@
 from invoke.context import Context
 
+from .constants import GODOT_URL
+
 
 class ConfigWrapper:
     @staticmethod
@@ -26,10 +28,26 @@ class ConfigWrapper:
         )
 
     @staticmethod
+    def godot_filename_url(c: Context) -> str:
+        return (
+            f"{GODOT_URL}/"
+            f"{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/"
+            f"{ConfigWrapper.godot_filename(c)}.zip"
+        )
+
+    @staticmethod
     def godot_template(c: Context) -> str:
         return (
             f"Godot_v{ConfigWrapper.godot_version(c)}"
             f"-{ConfigWrapper.godot_release(c)}_export_templates.tpz"
+        )
+
+    @staticmethod
+    def godot_template_url(c: Context) -> str:
+        return (
+            f"{GODOT_URL}/"
+            f"{ConfigWrapper.godot_version(c)}{ConfigWrapper.godot_subdir(c)}/"
+            f"{ConfigWrapper.godot_template(c)}"
         )
 
     @staticmethod

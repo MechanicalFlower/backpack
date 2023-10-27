@@ -13,6 +13,7 @@ def add_config_to_github_env(c: Context) -> None:
     Add 'godot_version' and 'game_version' to Github env.
     """
     c.run(f'echo "godot_version={ConfigWrapper.godot_version(c)}" >> $GITHUB_ENV')
+    c.run(f'echo "game_name={ConfigWrapper.game_name(c)}" >> $GITHUB_ENV')
     c.run(f'echo "game_version={ConfigWrapper.game_version(c)}" >> $GITHUB_ENV')
 
 
